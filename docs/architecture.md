@@ -30,3 +30,4 @@ The PhishSentry platform is organized as a set of loosely coupled components tha
 ## Future Enhancements
 - Evaluate gRPC streaming between the Scoring API and Model Engine to reduce serialization overhead.
 - Expand the Ops Dashboard to support real-time push updates using WebSockets.
+- Align component hosting with the [Infrastructure & Hosting Plan](./infrastructure.md) to ensure networking, observability, and deployment requirements are met across environments.
