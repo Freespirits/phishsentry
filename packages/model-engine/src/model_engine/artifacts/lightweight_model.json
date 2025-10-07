@@ -1,0 +1,13 @@
+{
+  "name": "lightweight-phish-model",
+  "bias": -1.0,
+  "weights": {
+    "length_norm": 1.2,
+    "digit_ratio": 2.5,
+    "keyword_flag": 1.8,
+    "has_ip": 2.2,
+    "subdomain_ratio": 1.1,
+    "https_flag": -0.7,
+    "suspicious_tld": 1.5
+  }
+}

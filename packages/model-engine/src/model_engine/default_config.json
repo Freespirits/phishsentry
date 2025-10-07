@@ -1,0 +1,33 @@
+{
+  "model": {
+    "path": "artifacts/lightweight_model.json",
+    "weight": 0.7
+  },
+  "thresholds": {
+    "phishing": 0.6
+  },
+  "blocklist": {
+    "items": [
+      "http://malware.test",
+      "http://phish.example"
+    ]
+  },
+  "allowlist": {
+    "items": [
+      "https://security.example"
+    ]
+  },
+  "heuristics": {
+    "digit_threshold": 6,
+    "digit_weight": 0.15,
+    "length_threshold": 40,
+    "length_weight": 0.2,
+    "subdomain_threshold": 3,
+    "subdomain_weight": 0.15,
+    "suspicious_tlds": ["zip", "xyz", "top", "click"],
+    "suspicious_tld_weight": 0.15,
+    "keyword_weight": 0.25,
+    "https_bonus": 0.1,
+    "base_score": 0.05
+  }
+}
