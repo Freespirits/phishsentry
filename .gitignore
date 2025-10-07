@@ -206,36 +206,11 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Node / Vite artifacts
+# Node
 node_modules/
-.pnpm-store/
-dist/
-*.tsbuildinfo
-pnpm-lock.yaml
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-packages/browser-extension/.env.local
-apps/ops-dashboard/.env.local
-
-# Browser extension build outputs
-packages/browser-extension/package/*.zip
-packages/browser-extension/build/
-
-# FastAPI / UV environments
-packages/scoring-api/.venv/
-packages/scoring-api/.env
-packages/scoring-api/.coverage
-
-# Model engine generated assets
-packages/model-engine/.venv/
-packages/model-engine/.env
-packages/model-engine/artifacts/
-packages/model-engine/data/
-packages/model-engine/**/*.mar
-packages/model-engine/**/*.pt
-
-# Ops dashboard local state
-apps/ops-dashboard/.env
-apps/ops-dashboard/.vite
-apps/ops-dashboard/coverage/
+*.log
+apps/ops-dashboard/dist/
+playwright-report/
+test-results/
+!apps/ops-dashboard/src/lib/
+!apps/ops-dashboard/src/lib/**
