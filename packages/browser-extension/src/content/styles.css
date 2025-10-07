@@ -1,0 +1,112 @@
+.ps-link-flagged {
+  position: relative;
+  border-bottom: 2px dotted rgba(255, 166, 0, 0.8);
+  cursor: help;
+}
+
+.ps-risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1f2933;
+  background-color: #f9fafb;
+  border: 1px solid rgba(31, 41, 51, 0.2);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15);
+}
+
+.ps-risk-badge[data-risk='high'] {
+  background-color: #fee2e2;
+  border-color: #f87171;
+  color: #7f1d1d;
+}
+
+.ps-risk-badge[data-risk='medium'] {
+  background-color: #fef3c7;
+  border-color: #fbbf24;
+  color: #78350f;
+}
+
+.ps-risk-badge[data-risk='low'] {
+  background-color: #dcfce7;
+  border-color: #34d399;
+  color: #065f46;
+}
+
+.ps-risk-badge[data-risk='unknown'] {
+  background-color: #e0e7ff;
+  border-color: #818cf8;
+  color: #3730a3;
+}
+
+.ps-panel-container {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483647;
+  width: min(360px, 85vw);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transform: translateY(120%);
+  transition: transform 0.25s ease;
+}
+
+.ps-panel-container[data-open='true'] {
+  transform: translateY(0);
+}
+
+.ps-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(120deg, #2563eb, #7c3aed);
+  color: #fff;
+}
+
+.ps-panel-body {
+  padding: 16px;
+  color: #1f2933;
+  line-height: 1.5;
+}
+
+.ps-panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ps-panel-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: inherit;
+  border-radius: 999px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.ps-panel-metadata {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.ps-panel-metadata strong {
+  display: inline-block;
+  min-width: 72px;
+}
+
+.ps-muted {
+  color: #6b7280;
+}
