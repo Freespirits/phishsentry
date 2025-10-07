@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node
+node_modules/
+*.log
+apps/ops-dashboard/dist/
+playwright-report/
+test-results/
+!apps/ops-dashboard/src/lib/
+!apps/ops-dashboard/src/lib/**

@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  scoring-api:
+    build:
+      context: ../..
+      dockerfile: packages/scoring-api/Dockerfile
+    environment:
+      UVICORN_WORKERS: 2
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

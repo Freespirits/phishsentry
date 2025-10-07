@@ -1,0 +1,15 @@
+{
+  "name": "phishsentry",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace ops-dashboard",
+    "dev": "npm run dev --workspace ops-dashboard",
+    "test": "npm run test --workspace ops-dashboard",
+    "lint": "npm run lint --workspace ops-dashboard",
+    "preview": "npm run preview --workspace ops-dashboard",
+    "test:e2e": "npm run test:e2e --workspace ops-dashboard"
+  }
+}
