@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "PhishSentry",
+  "description": "Highlights risky links across Gmail, websites, and social platforms with quick access to API-backed insights.",
+  "version": "0.1.0",
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "PhishSentry"
+  },
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content/gmail.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://*.twitter.com/*",
+        "https://*.linkedin.com/*",
+        "https://*.instagram.com/*"
+      ],
+      "js": ["content/social.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "exclude_matches": ["https://mail.google.com/*"],
+      "js": ["content/web.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
