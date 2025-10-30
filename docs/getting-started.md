@@ -76,8 +76,8 @@ Consider using Docker Compose (see `packages/scoring-api/docker-compose.yml`) on
    - Set up AWS networking plus RDS and ECS resources (or Fly.io if preferred) for the Scoring API and Model Engine.
    - Configure GitHub Actions secrets for deployment (`CLOUDFLARE_API_TOKEN`, `AWS_ACCESS_KEY_ID`, `FLY_API_TOKEN`).
 2. **Define service data contracts**:
-   - Add the missing protobuf/OpenAPI schemas referenced in the [Architecture Overview](./architecture.md).
-   - Document event payload versions under a new `docs/schemas/` directory.
+   - Maintain the protobuf/OpenAPI schemas referenced in the [Architecture Overview](./architecture.md).
+   - Keep the event payload definitions under `docs/schemas/` current as new fields roll out across clients.
 3. **Operational readiness**:
    - Draft incident response and database failover runbooks.
    - Align alerting/observability wiring with the logging and metrics stack described in the infrastructure plan.

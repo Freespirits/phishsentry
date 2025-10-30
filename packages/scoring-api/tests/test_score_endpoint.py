@@ -52,7 +52,28 @@ def test_score_endpoint_returns_result(client: TestClient, app: FastAPI) -> None
 
     response = client.post(
         "/score",
-        json={"url": "https://example.com/login"},
+        json={
+            "url": "https://example.com/login",
+            "event": {
+                "schema_version": "extension.event.v1",
+                "event_id": "evt_123",
+                "observed_at": "2024-05-19T17:21:54.219Z",
+                "page_url": "https://example.com/login",
+                "top_level_url": "https://example.com",
+                "tab_id": "91",
+                "frame_id": "0",
+                "client_version": "1.3.0",
+                "locale": "en-US",
+                "artifacts": [
+                    {
+                        "artifact_id": "art-1",
+                        "kind": "screenshot",
+                        "storage_url": "https://storage.example.com/art-1.png",
+                    }
+                ],
+                "signals": {"keyword_match": "login"},
+            },
+        },
     )
 
     assert response.status_code == status.HTTP_200_OK
@@ -64,6 +85,26 @@ def test_score_endpoint_returns_result(client: TestClient, app: FastAPI) -> None
 
 def test_score_endpoint_validates_url(client: TestClient) -> None:
     response = client.post("/score", json={"url": "not-a-url"})
+    assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+
+
+def test_score_endpoint_validates_event(client: TestClient) -> None:
+    response = client.post(
+        "/score",
+        json={
+            "url": "https://example.com",  # valid URL
+            "event": {
+                "schema_version": "extension.event.v1",
+                "event_id": " ",  # invalid: blank after stripping
+                "observed_at": "not-a-timestamp",
+                "page_url": "https://example.com/login",
+                "tab_id": "",
+                "frame_id": "0",
+                "client_version": "1.0.0",
+            },
+        },
+    )
+
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
 
