@@ -23,8 +23,10 @@ The PhishSentry platform is organized as a set of loosely coupled components tha
 - Deployment pipelines for all components are orchestrated in GitHub Actions with environment-specific gates.
 
 ## Data Contracts
-- Event schemas between the Browser Extension and Scoring API are versioned under `docs/schemas` (to be created).
-- The Scoring API ↔ Model Engine contract uses protobuf definitions for low-latency inference calls.
+- Event schemas between the Browser Extension and Scoring API are versioned under `docs/schemas`
+  (see `extension-event.v1.json`).
+- The Scoring API ↔ Model Engine contract uses protobuf definitions for low-latency inference calls
+  (`model-engine.proto`).
 - Ops Dashboard expects normalized case records and metrics exposed via `/v1/analytics` endpoints on the Scoring API.
 
 ## Future Enhancements

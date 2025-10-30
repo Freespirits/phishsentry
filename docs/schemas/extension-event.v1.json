@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.phishsentry.dev/extension-event.v1.json",
+  "title": "PhishSentry Browser Extension Event (v1)",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "observed_at",
+    "page_url",
+    "tab_id",
+    "frame_id",
+    "client_version"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Telemetry schema identifier emitted by the browser extension.",
+      "const": "extension.event.v1"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for the extension event."
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp captured by the browser when the suspicious URL was observed."
+    },
+    "page_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Frame-level URL flagged by the extension heuristics."
+    },
+    "top_level_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Top-level document URL that contains the suspicious frame."
+    },
+    "tab_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Browser tab identifier associated with the event."
+    },
+    "frame_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Browser frame identifier that triggered the telemetry event."
+    },
+    "client_version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version of the browser extension emitting the telemetry payload."
+    },
+    "locale": {
+      "type": ["string", "null"],
+      "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$",
+      "description": "Optional IETF language tag representing the user locale."
+    },
+    "signals": {
+      "type": "object",
+      "description": "Lightweight key-value signals produced locally by the extension.",
+      "additionalProperties": {
+        "type": ["string", "null"]
+      },
+      "default": {}
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Collection of artifacts captured alongside the event (screenshots, DOM dumps, etc.).",
+      "items": {
+        "$ref": "#/definitions/artifact"
+      },
+      "default": []
+    }
+  },
+  "definitions": {
+    "artifact": {
+      "type": "object",
+      "required": ["artifact_id", "kind"],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable identifier used to retrieve the artifact contents."
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Artifact category (e.g. screenshot, dom_snapshot, network_capture)."
+        },
+        "storage_url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Optional pre-signed URL pointing to the artifact payload."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package phishsentry.model.v1;
+
+option java_multiple_files = true;
+option java_package = "dev.phishsentry.model.v1";
+option go_package = "github.com/phishsentry/phishsentry/pkg/modelv1";
+
+// Request issued by the Scoring API to the model engine for inference.
+message ScoringRequest {
+  string request_id = 1;          // Correlates downstream logs and responses.
+  string url = 2;                 // URL under evaluation.
+  EventContext event = 3;         // Optional browser telemetry payload.
+  repeated Feature features = 4;  // Normalised feature vector for ML inference.
+  map<string, string> metadata = 5; // Arbitrary metadata (tenant, campaign, etc.).
+}
+
+// Subset of the browser extension telemetry payload forwarded to the model engine.
+message EventContext {
+  string schema_version = 1;
+  string event_id = 2;
+  string tab_id = 3;
+  string frame_id = 4;
+  map<string, string> signals = 5;
+  repeated Artifact artifacts = 6;
+}
+
+// Artifact references that can be retrieved asynchronously by the model engine.
+message Artifact {
+  string artifact_id = 1;
+  ArtifactType type = 2;
+  string storage_url = 3;
+}
+
+enum ArtifactType {
+  ARTIFACT_TYPE_UNSPECIFIED = 0;
+  ARTIFACT_TYPE_SCREENSHOT = 1;
+  ARTIFACT_TYPE_DOM_SNAPSHOT = 2;
+  ARTIFACT_TYPE_NETWORK_CAPTURE = 3;
+}
+
+// Features supplied by the Scoring API after enrichment.
+message Feature {
+  string name = 1;
+  double value = 2;
+  string source = 3; // Optional origin (lexical, dns, whois, extension_signal, etc.).
+}
+
+// Inference response returned by the model engine.
+message ScoringResponse {
+  string request_id = 1;
+  double risk_score = 2;                 // Normalised risk score in [0,1].
+  repeated Explanation explanations = 3; // Human-readable explanations for operators.
+  map<string, string> signals = 4;       // Diagnostic metadata for debugging.
+  double model_confidence = 5;           // Optional confidence score when supported by models.
+  string model_version = 6;              // Identifier of the active model artifact.
+}
+
+message Explanation {
+  string label = 1;
+  string detail = 2;
+}
+
+service ModelEngine {
+  rpc Score (ScoringRequest) returns (ScoringResponse);
+}
